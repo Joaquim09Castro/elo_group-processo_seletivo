@@ -19,7 +19,7 @@ const LogInModal = (props) => {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Sign In
+        Log In
       </Button>
 
       <Modal
@@ -29,9 +29,13 @@ const LogInModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Log In</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        
+        <Modal.Body>
+
+        </Modal.Body>
+        
         <Modal.Footer className={modalFooter}>
           <Button
             className={footerButton}
