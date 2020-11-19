@@ -1,0 +1,19 @@
+.modalFooter {
+  display: grid;
+  grid-template: 
+    "button"
+    "link"
+  ;
+  justify-content: center;
+}
+
+.footerButton {
+  width: 100%;
+  grid-area: button;
+}
+
+.footerNav {
+  font-size: 0.85em;
+  text-align: center;
+  grid-area: link;
+}

@@ -1,0 +1,12 @@
+.footerContainer {
+  display: grid;
+  background-color: #343a40;
+  color: #E9E9E9;
+  border-radius: 10px 10px 0 0;
+  justify-content: center;
+}
+
+.footerText {
+  margin: 5% 0;
+  align-self: center;
+}
