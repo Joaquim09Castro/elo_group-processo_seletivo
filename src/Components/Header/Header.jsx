@@ -3,7 +3,7 @@ import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Image from 'react-bootstrap/Image'
 
-import LogInModal from "../LogInModal/LogInModal";
+import LogInModal from "../RegisterModal/RegisterModal";
 
 import {
   navbar,

@@ -8,9 +8,9 @@ import {
   modalFooter,
   footerButton,
   footerNav
-} from './LogInModal.module.css'
+} from './RegisterModal.module.css'
 
-const LogInModal = (props) => {
+const RegisterModal = (props) => {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
@@ -54,4 +54,4 @@ const LogInModal = (props) => {
   );
 }
 
-export default LogInModal
+export default RegisterModal
