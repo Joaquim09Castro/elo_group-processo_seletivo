@@ -2,13 +2,10 @@ import React from 'react'
 
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Nav from 'react-bootstrap/Nav';
 
-import {
-  modalFooter,
-  footerButton,
-  footerNav
-} from './RegisterModal.module.css'
+import {} from './RegisterModal.module.css'
+
+import RegisterForm from '../RegisterForm/RegisterForm';
 
 const RegisterModal = (props) => {
   const [show, setShow] = React.useState(false);
@@ -19,7 +16,7 @@ const RegisterModal = (props) => {
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
-        Log In
+        Register
       </Button>
 
       <Modal
@@ -29,26 +26,12 @@ const RegisterModal = (props) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title>Log In</Modal.Title>
+          <Modal.Title>Register</Modal.Title>
         </Modal.Header>
         
         <Modal.Body>
-
+          <RegisterForm />
         </Modal.Body>
-        
-        <Modal.Footer className={modalFooter}>
-          <Button
-            className={footerButton}
-            variant="primary"
-            onClick={handleClose}
-          >
-            Log In
-          </Button>
-          <Nav className={footerNav}>
-            Don't have an account?
-            <Nav.Link href="/sign-in">Sign in</Nav.Link> 
-          </Nav>
-        </Modal.Footer>
       </Modal>
     </>
   );

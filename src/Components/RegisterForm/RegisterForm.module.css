@@ -1,0 +1,8 @@
+.registerButtonContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.registerButton {
+  width: 80%;
+}
