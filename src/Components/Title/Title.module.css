@@ -1,0 +1,7 @@
+.title {
+  margin-bottom: 1em;
+  grid-area: title;
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}

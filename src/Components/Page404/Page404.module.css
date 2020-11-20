@@ -1,0 +1,18 @@
+.title {
+  font-size: 5em;
+  font-weight: bolder;
+}
+
+.messageContainer {
+  grid-area: content;
+  text-align: center;
+}
+
+.messageText {
+  font-size: 3em;
+}
+
+.messageImage {
+  margin-top: 2em;
+  width: 1fr;
+}

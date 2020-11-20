@@ -1,24 +1,15 @@
-.navbar {
-  width: 100%;
+.header {
+  display: grid;
+  padding: 1em;
+  background-color: #343a40;
   border-radius: 0 0 10px 10px;
+  justify-content: center;
 }
 
 .logo {
-  margin: 0 auto 0 0;
-}
-
-.navButtonContainer {
-  display: flex;
-  justify-content: flex-end;
-}
-
-@media (max-width:600px) {
-  .navbar {
-    display: grid;
-    justify-content: center;
-  }
-
-  .logo {
-    padding-bottom: 2em;
-  }
+  padding: 4%;
+  border-radius: 0.5em;
+  align-self: center;
+  text-align: center;
+  background-color: #000000;
 }

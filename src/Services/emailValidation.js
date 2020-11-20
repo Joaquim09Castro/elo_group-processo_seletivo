@@ -1,7 +1,7 @@
 import isEmail from 'sane-email-validation'
 
-const emailValidation = ( string ) => {
+const formEmailHandler = ( string ) => {
   return isEmail( string );
 }
 
-export default emailValidation
+export default formEmailHandler
