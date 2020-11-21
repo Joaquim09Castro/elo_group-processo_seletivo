@@ -3,6 +3,7 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 
+import formValidation from "../../Services/formValidation";
 import usernameValidation from "../../Services/usernameValidation"
 import emailValidation from "../../Services/emailValidation"
 import { passwordValidation , passwordConfirmationValidation } from "../../Services/passwordValidation"
@@ -14,12 +15,22 @@ import {
 } from "./RegisterForm.module.css";
 
 const RegisterForm = ( { className , ...props } ) => {
-  const [ usernameCheck , setUsernameCheck ] = React.useState( Boolean );
-  const [ emailCheck , setEmailCheck ] = React.useState( Boolean );
-  const [ passwordCheck , setPasswordCheck ] = React.useState( Boolean );
-  const [ passwordConfirmationCheck , setPasswordConfirmationCheck ] = React.useState( Boolean );
+  const [ validated , setValidated ] = React.useState(false);
+
+  const [ usernameCheck , setUsernameCheck ] = React.useState( false );
+  const [ emailCheck , setEmailCheck ] = React.useState( false );
+  const [ passwordCheck , setPasswordCheck ] = React.useState( false );
+  const [ passwordConfirmationCheck , setPasswordConfirmationCheck ] = React.useState( false );
   
   const [ password , setPassword ] = React.useState( String );
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if( formValidation( usernameCheck , emailCheck , passwordCheck , passwordConfirmationCheck ) ) {
+      window.location.replace('/pannel')
+    }
+    setValidated( true );
+  };
 
   const handleUsernameOnKeyUp = ( event ) => {
     setUsernameCheck( usernameValidation( event.target.value ) );
@@ -39,63 +50,95 @@ const RegisterForm = ( { className , ...props } ) => {
   }
 
   return (
-    <Form id="registerForm" className={`${formContainer} ${className}`}>
-
+    <Form
+      noValidate
+      id="registerForm"
+      className={`${formContainer} ${className}`} 
+      onSubmit={handleSubmit}
+    >
       <Form.Group controlId="username">
-        <Form.Label>Username*</Form.Label>
-        
-        <Form.Text></Form.Text>
-
+        <Form.Label><b>Username*</b></Form.Label>
         <Form.Control
+          required
           type="text"
-          placeholder="Enter username"
+          placeholder="Username"
           onKeyUp={ handleUsernameOnKeyUp }
+          isValid={ usernameCheck }
+          isInvalid={ !usernameCheck && validated }
         />
-
+        <Form.Control.Feedback type="invalid">
+          Invalid username
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="email">
-        <Form.Label>Email*</Form.Label>
-
+        <Form.Label><b>Email*</b></Form.Label>
         <Form.Control
+          required
           type="email"
-          placeholder="Enter email"
+          placeholder="example@email.dom"
           onKeyUp={ handleEmailOnKeyUp }
+          isValid={ emailCheck }
+          isInvalid={ !emailCheck && validated }
         />
-        
+        <Form.Control.Feedback type="invalid">
+          Invalid email
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group controlId="password">
-        <Form.Label>Password*</Form.Label>
-
+        <Form.Label><b>Password*</b></Form.Label>
+        <Form.Text muted="true">
+          The password must have:
+          <br />
+          - 8 characters or more
+          <br />
+          - at least one number
+          <br />
+          - at least one special character
+        </Form.Text>
         <Form.Control
+          required
           type="password"
           placeholder="Password"
           onKeyUp={ handlePasswordOnKeyUp }
+          isValid={ passwordCheck }
+          isInvalid={ !passwordCheck && validated }
         />
-
+        <Form.Control.Feedback type="invalid">
+          Invalid password
+        </Form.Control.Feedback>
       </Form.Group>
-      <Form.Group controlId="passwordConfimation">
-        <Form.Label>Confirm Password*</Form.Label>
 
+      <Form.Group
+        controlId="passwordConfimation"
+      >
+        <Form.Label><b>Confirm Password*</b></Form.Label>
         <Form.Control
+          required
           type="password"
           placeholder="Password"
           onKeyUp={ handlePasswordConfirmationOnKeyUp }
+          isValid={ passwordCheck && passwordConfirmationCheck }
+          isInvalid={ !passwordConfirmationCheck && validated }
         />
-
+        <Form.Control.Feedback type="invalid">
+          {
+            passwordConfirmationCheck ?
+              "" : "Passwords don't match"
+          }
+        </Form.Control.Feedback>
       </Form.Group>
 
-      <Form.Group controlId="registerButton" className={registerButtonContainer}>
+      <div className={registerButtonContainer}>
         <Button
-          form="registerForm"
+          type="submit"
           className={registerButton}
           variant="primary"
-          href={ usernameCheck && emailCheck && passwordCheck && passwordConfirmationCheck && "/pannel" }
         >
           Register
         </Button>
-      </Form.Group>
+      </div>
     </Form>
   )
 }
