@@ -1,0 +1,59 @@
+.container {
+  display: grid;
+  grid-area: content;
+  grid-template:
+    " button . . " 5ch 
+    " table table table " auto / auto auto auto
+  ;
+}
+
+.dropdown {
+  grid-area: button;
+}
+
+.dropdown > div {
+  display: flex;
+  text-align: center;
+}
+
+.addLeadInput {
+  width: 80%;
+}
+
+.addLeadButton {
+  margin-top: 1ch;
+  width: 80%;
+}
+
+.table {
+  grid-area: table;
+  margin-top: 2em;
+  background-color: #EAEAEADF;
+  border: 2px solid #000 !important;
+}
+
+.table td,th {
+  border-left: 1px solid #000 !important;
+  border-right: 1px solid #000 !important;
+}
+
+.tableHeader {
+  text-align: center;
+  background-color: #A2A2A2;
+  border-bottom: 0.4ch solid #000 !important;
+}
+
+.tableHeader th{
+  width: 1ch;
+  vertical-align: middle !important;
+  font-size: 1.2em;
+}
+
+@media ( max-width: 735px ) {
+  .container {
+    overflow-x: scroll;
+    direction: ltr;
+    border: 4px double #343232;
+    border-radius: 6px;
+  }
+}

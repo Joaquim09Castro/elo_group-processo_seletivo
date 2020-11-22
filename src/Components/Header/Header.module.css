@@ -4,6 +4,7 @@
   background-color: #343a40;
   border-radius: 0 0 10px 10px;
   justify-content: center;
+  box-shadow: rgb(26, 26, 26) 0 10px 20px;
 }
 
 .logo {

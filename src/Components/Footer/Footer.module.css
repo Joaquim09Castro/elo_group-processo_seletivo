@@ -4,6 +4,7 @@
   color: #E9E9E9;
   border-radius: 10px 10px 0 0;
   justify-content: center;
+  box-shadow: rgb(26, 26, 26) -5px -10px 30px;
 }
 
 .footerText {

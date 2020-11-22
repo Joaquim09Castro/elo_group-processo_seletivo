@@ -1,0 +1,7 @@
+.body tr {
+  text-align: center;
+}
+
+.body tr:nth-child( even ) {
+  background-color: #CDCDCD;
+}
