@@ -1,0 +1,27 @@
+.form {
+  display: grid;
+  grid-gap: 10%;
+  grid-template: 
+    "text-inputs checklist" 1fr / 1fr 1fr
+  ;
+}
+
+.textInputs {
+  grid-area: text-inputs;
+}
+
+.checklist {
+  grid-area: checklist;
+}
+
+.checkboxOptionGroup {
+  margin: 2ch;
+}
+
+.checkboxLabel {
+  margin-left: 1em;
+}
+
+.submitButton {
+  width: 90%;
+}

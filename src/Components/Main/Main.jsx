@@ -2,10 +2,10 @@ import React from 'react'
 
 import { main } from './Main.module.css'
 
-const Main = ( { children } ) => {
+const Main = ({ children, className }) => {
   return (
-    <main className={main}>
-      { children }
+    <main className={`${main} ${className}`}>
+      { children}
     </main>
   )
 }

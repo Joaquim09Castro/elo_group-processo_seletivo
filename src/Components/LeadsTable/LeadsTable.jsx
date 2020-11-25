@@ -1,41 +1,37 @@
 import React from 'react'
 
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 
 import TableBody from './TableBody/TableBody'
 
 import { drag , allowDrop , drop } from '../../Services/drag&DropPannelHandling'
-import addLead from "../../Services/leadAdditionHandle"
 
 import {
   container,
-  dropdown,
-  addLeadInput,
-  addLeadButton,
   table,
   tableHeader,
   tableBody
 } from "./LeadsTable.module.css";
+import AddLeadsModal from './AddLeadsModal/AddLeadsModal'
+import ShowInfoModal from './ShowInfoModal/ShowInfoModal';
+import addLead from '../../Services/LeadsAddServices/leadAdditionHandle'
 
 const LeadsTable = () => {
-  const [ remountCount , setRemountCount ] = React.useState(0);
+  const [ leads , setLeads ] = React.useState( Array );
 
-  const [ leads , setLeads ] = React.useState( [
-    { title: "Org. Internacionais" , state: 1 },
-    { title: "Ind. Farm. LTDA" , state: 2 },
-    { title: "Musc. Sound Live Cmp" , state: 1 }
-  ] );
-  const [ disableAddLead , setDisableAddLead ] = React.useState(true);
+  const [ infoModalShow, setInfoModalShow] = React.useState(false);
+  const [ infoModalContent , setInfoModalContent] = React.useState({});
 
-  const handleInputChange = ( event ) => {
-    if ( event.target.value !== "" )
-      setDisableAddLead( false );
+  const handleInfoModalHide = () => {
+    setInfoModalShow(false);
   }
 
-  const handleLeadAddition = ( event ) => {
-    addLead(leads , setLeads , setDisableAddLead);
+  const handleDoubleClick = ( event ) => {
+    if(event.target.value !== "") {
+      const idx = event.target.id.split('-')[1].split('_')[1];
+      setInfoModalContent(leads[idx]);
+      setInfoModalShow(true);
+    }
   }
 
   const handleDrag = ( event ) => {
@@ -47,33 +43,39 @@ const LeadsTable = () => {
   }
 
   const handleDrop = ( event ) => {
-    drop( event );
-    setRemountCount(remountCount + 1);
+    drop( event , handleDoubleClick);
+  }
+
+  const handleOnSubmit = (event) => {
+    const [
+      name,
+      phone,
+      email,
+      checkAll,
+      rpaCheck,
+      digitalProductsCheck,
+      analyticsCheck,
+      bpmCheck
+    ] = event.nativeEvent.srcElement;
+
+    if ( name.validity.valid && phone.validity.valid && email.validity.valid ){
+      const newLead = addLead( [ name.value , phone.value , email.value ] , [ checkAll, rpaCheck, digitalProductsCheck, analyticsCheck, bpmCheck]);
+      setLeads( [...leads, newLead])
+    }
   }
 
   return (
     <div className={container}>
-      <DropdownButton
-        id="dropdown-add-lead"
-        className={dropdown}
-        title="New Leed (+)"
-      >
-          <label htmlFor="lead-name">New Lead</label>
-          <input
-            id="lead-name"
-            className={addLeadInput}
-            type="text"
-            onChange={ handleInputChange }
-          />
-            <Button
-              className={addLeadButton}
-              variant="primary"
-              onClick={ handleLeadAddition }
-              disabled={ disableAddLead }
-            >
-            Add
-            </Button>
-      </DropdownButton>
+      <ShowInfoModal 
+        values={infoModalContent}
+        show={infoModalShow}
+        onHide={handleInfoModalHide}
+      />
+
+      <AddLeadsModal 
+        setleads={ [ leads , setLeads ] }
+        onSubmit={ handleOnSubmit}
+      />
 
       <Table
         variant="light"
@@ -89,6 +91,7 @@ const LeadsTable = () => {
         <TableBody
           className={tableBody}
           value={[...leads]}
+          onDoubleClick={ handleDoubleClick }
           onDragStart={ handleDrag }
           onDragOver={ handleDragOver }
           onDrop={ handleDrop }

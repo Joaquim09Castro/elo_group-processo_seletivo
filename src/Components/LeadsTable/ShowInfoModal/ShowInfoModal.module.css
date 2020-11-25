@@ -1,0 +1,33 @@
+.modalHeader {
+  display: block;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.modalBody {
+  display: grid;
+  grid-template: 
+    " label label "
+    "section-1 section-2" auto / 1fr 1fr
+  ;
+  grid-gap: auto;
+}
+
+.modalBody > section > p {
+  margin-left: 2em;
+}
+
+.infoLabel {
+  grid-area: label;
+  text-align: center;
+  font-weight: bolder;
+  margin: 1% 0 8%;
+}
+
+.emailPhoneSection {
+  grid-area: section-1;
+}
+
+.oportunitiesSection {
+  grid-area: section-2;
+}

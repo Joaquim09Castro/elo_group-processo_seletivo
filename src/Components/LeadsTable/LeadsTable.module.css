@@ -53,7 +53,7 @@
   .container {
     overflow-x: scroll;
     direction: ltr;
-    border: 4px double #343232;
+    border: 8px double #0c93d143;
     border-radius: 6px;
   }
 }

@@ -19,10 +19,10 @@ function App() {
 
         <Switch>
           <Route exact path="/" children={<Register />} />
-          <Route path="/pannel" children={<Pannel />}/>
-          <Route path="*" children={<Page404 />}/>
+          <Route path="/pannel" children={<Pannel />} />
+          <Route path="*" children={<Page404 />} />
         </Switch>
-      
+
         <Footer />
       </BrowserRouter>
     </div>

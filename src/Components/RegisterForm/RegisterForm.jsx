@@ -3,10 +3,9 @@ import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 
-import formValidation from "../../Services/formValidation";
-import usernameValidation from "../../Services/usernameValidation"
-import emailValidation from "../../Services/emailValidation"
-import { passwordValidation , passwordConfirmationValidation } from "../../Services/passwordValidation"
+import formValidation from "../../Services/RegisterServices/formValidation";
+import usernameValidation from "../../Services/RegisterServices/usernameValidation"
+import { passwordValidation, passwordConfirmationValidation } from "../../Services/RegisterServices/passwordValidation"
 
 import {
   formContainer,
@@ -14,46 +13,41 @@ import {
   registerButton
 } from "./RegisterForm.module.css";
 
-const RegisterForm = ( { className , ...props } ) => {
-  const [ validated , setValidated ] = React.useState(false);
+const RegisterForm = ({ className, ...props }) => {
+  const [validated, setValidated] = React.useState(false);
 
-  const [ usernameCheck , setUsernameCheck ] = React.useState( false );
-  const [ emailCheck , setEmailCheck ] = React.useState( false );
-  const [ passwordCheck , setPasswordCheck ] = React.useState( false );
-  const [ passwordConfirmationCheck , setPasswordConfirmationCheck ] = React.useState( false );
-  
-  const [ password , setPassword ] = React.useState( String );
-  
+  const [usernameCheck, setUsernameCheck] = React.useState(false);
+  const [passwordCheck, setPasswordCheck] = React.useState(false);
+  const [passwordConfirmationCheck, setPasswordConfirmationCheck] = React.useState(false);
+
+  const [password, setPassword] = React.useState(String);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    if( formValidation( usernameCheck , emailCheck , passwordCheck , passwordConfirmationCheck ) ) {
+    if (formValidation(usernameCheck, passwordCheck, passwordConfirmationCheck)) {
       window.location.replace('/pannel')
     }
-    setValidated( true );
+    setValidated(true);
   };
 
-  const handleUsernameOnKeyUp = ( event ) => {
-    setUsernameCheck( usernameValidation( event.target.value ) );
+  const handleUsernameOnKeyUp = (event) => {
+    setUsernameCheck(usernameValidation(event.target.value));
   }
 
-  const handleEmailOnKeyUp = ( event )  => {
-    setEmailCheck( emailValidation( event.target.value ) );
+  const handlePasswordOnKeyUp = (event) => {
+    setPassword(event.target.value);
+    setPasswordCheck(passwordValidation(password));
   }
 
-  const handlePasswordOnKeyUp = ( event ) => {
-    setPassword( event.target.value );
-    setPasswordCheck( passwordValidation( password ) );
-  }
-
-  const handlePasswordConfirmationOnKeyUp = ( event ) => {
-    setPasswordConfirmationCheck( passwordConfirmationValidation( password , event.target.value ) );
+  const handlePasswordConfirmationOnKeyUp = (event) => {
+    setPasswordConfirmationCheck(passwordConfirmationValidation(password, event.target.value));
   }
 
   return (
     <Form
       noValidate
       id="registerForm"
-      className={`${formContainer} ${className}`} 
+      className={`${formContainer} ${className}`}
       onSubmit={handleSubmit}
     >
       <Form.Group controlId="username">
@@ -62,30 +56,14 @@ const RegisterForm = ( { className , ...props } ) => {
           required
           type="text"
           placeholder="Username"
-          onKeyUp={ handleUsernameOnKeyUp }
-          isValid={ usernameCheck }
-          isInvalid={ !usernameCheck && validated }
+          onKeyUp={handleUsernameOnKeyUp}
+          isValid={usernameCheck}
+          isInvalid={!usernameCheck && validated}
         />
         <Form.Control.Feedback type="invalid">
           Invalid username
         </Form.Control.Feedback>
       </Form.Group>
-
-      <Form.Group controlId="email">
-        <Form.Label><b>Email*</b></Form.Label>
-        <Form.Control
-          required
-          type="email"
-          placeholder="example@email.dom"
-          onKeyUp={ handleEmailOnKeyUp }
-          isValid={ emailCheck }
-          isInvalid={ !emailCheck && validated }
-        />
-        <Form.Control.Feedback type="invalid">
-          Invalid email
-        </Form.Control.Feedback>
-      </Form.Group>
-
       <Form.Group controlId="password">
         <Form.Label><b>Password*</b></Form.Label>
         <Form.Text muted="true">
@@ -101,9 +79,9 @@ const RegisterForm = ( { className , ...props } ) => {
           required
           type="password"
           placeholder="Password"
-          onKeyUp={ handlePasswordOnKeyUp }
-          isValid={ passwordCheck }
-          isInvalid={ !passwordCheck && validated }
+          onKeyUp={handlePasswordOnKeyUp}
+          isValid={passwordCheck}
+          isInvalid={!passwordCheck && validated}
         />
         <Form.Control.Feedback type="invalid">
           Invalid password
@@ -118,9 +96,9 @@ const RegisterForm = ( { className , ...props } ) => {
           required
           type="password"
           placeholder="Password"
-          onKeyUp={ handlePasswordConfirmationOnKeyUp }
-          isValid={ passwordCheck && passwordConfirmationCheck }
-          isInvalid={ !passwordConfirmationCheck && validated }
+          onKeyUp={handlePasswordConfirmationOnKeyUp}
+          isValid={passwordCheck && passwordConfirmationCheck}
+          isInvalid={!passwordConfirmationCheck && validated}
         />
         <Form.Control.Feedback type="invalid">
           {
